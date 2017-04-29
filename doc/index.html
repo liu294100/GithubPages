@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" class="hello">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>使用Git上传项目代码到github  </title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+  <meta name="keywords" content="DevOps  环境部署GitGithub  如何使用Git上传项目代码到github 1KE.CO">
+  <meta name="description" content="github是一个基于git的代码托管平台，付费用户可以建私人仓库，我们一般的免费用户只能使用公共仓库，也就是代码要公开。这对于一般人来说公共仓库就已经足够了。...">
+  <meta name="author" content="">
+  <meta content="5dae247bbe504bb310143fb62e9783b86e14e01e" name="csrf-token">
+   
+     <link href="http://1ke.co/files/system/favicon_1436182384.ico?4.9.3" rel="shortcut icon">
+         
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="1KE.CO">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <link href="http://1ke.co/themes/1ke_3/img/logo-152.png?4.9.3" sizes="152x152" rel="apple-touch-icon-precomposed">
+    <!-- iPad retina icon (iOS < 7) -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-144.png?4.9.3" sizes="144x144" rel="apple-touch-icon-precomposed">
+    <!-- iPad non-retina icon -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-76.png?4.9.3" sizes="76x76" rel="apple-touch-icon-precomposed">
+    <!-- iPad non-retina icon (iOS < 7) -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-72.png?4.9.3" sizes="72x72" rel="apple-touch-icon-precomposed">
+    <!-- iPhone 6 Plus icon -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-120.png?4.9.3" sizes="120x120" rel="apple-touch-icon-precomposed">
+    <!-- iPhone retina icon (iOS < 7) -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-114.png?4.9.3" sizes="114x114" rel="apple-touch-icon-precomposed">
+    <!-- iPhone non-retina icon (iOS < 7) -->
+    <link href="http://1ke.co/themes/1ke_3/img/logo-57.png?4.9.3" sizes="57x57" rel="apple-touch-icon-precomposed">
+
+
+       
+
+
+  <link rel="stylesheet" href="./githubGuide/bootstrap.min.css">
+  <link rel="stylesheet" media="screen" href="./githubGuide/common.css">
+  <link rel="stylesheet" media="screen" href="./githubGuide/bootstrap-extends.css">
+  <link rel="stylesheet" media="screen" href="./githubGuide/web.css">
+  <link rel="stylesheet" media="screen" href="./githubGuide/1ke.css">
+
+
+  <link rel="stylesheet" media="screen" href="./githubGuide/member.css">
+  
+
+  
+  <link rel="stylesheet" href="./githubGuide/style.css"> <!-- Resource style -->
+ 
+  <link rel="stylesheet" media="screen" href="./githubGuide/1ke_mix.css">
+  <link rel="stylesheet" href="./githubGuide/new1ke.css"> 
+  <link rel="stylesheet" media="screen" href="./githubGuide/font-awesome.css">
+  
+  
+  
+
+
+   <!--[if lt IE 8]>
+   <link href="/assets/css/oldie.css?4.9.3" rel="stylesheet">
+   <![endif]-->
+
+   
+
+   
+    
+<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+    
+    <script async="" src="//eco-api.meiqia.com/dist/meiqia.js"></script><script async="" src="//eco-api.meiqia.com/dist/meiqia.js"></script><script async="" src="//eco-api.meiqia.com/dist/meiqia.js"></script><script async="" src="//eco-api.meiqia.com/dist/meiqia.js"></script><script async="" src="//eco-api.meiqia.com/dist/meiqia.js"></script><script async="" src="./githubGuide/meiqia.js"></script><script src="./githubGuide/modernizr.js"></script> <!-- Modernizr -->
+   
+    
+    
+<script>
+  var app = {};
+  app.debug = true;
+  app.version = '4.9.3';
+  app.httpHost = 'http://1ke.co';
+  app.basePath = '';
+  app.theme = '1ke_3';
+  app.themeGlobalScript = '';
+  app.jsPaths = {"common":"common","theme":"\/themes\/1ke_3\/js","customwebbundle":"\/bundles\/customweb\/js","customadminbundle":"\/bundles\/customadmin\/js"};
+
+  var CKEDITOR_BASEPATH = app.basePath + '/assets/libs/ckeditor/4.6.7/';
+
+  app.config = {"api":{"weibo":{"key":""},"qq":{"key":"101219219"},"douban":{"key":""},"renren":{"key":""}},"cloud":{"video_player":"http:\/\/cdn.staticfile.org\/GrindPlayerCN\/1.0.2\/GrindPlayer.swf","video_player_watermark_plugin":"http:\/\/cdn.staticfile.org\/GrindPlayerCN\/1.0.2\/Watermake-1.0.3.swf","video_player_fingerprint_plugin":"http:\/\/cdn.staticfile.org\/GrindPlayerCN\/1.0.2\/Fingerprint-1.0.1.swf"},"editor_upload_path":"\/kindeditor\/upload","loading_img_path":"\/assets\/img\/default\/loading.gif?4.9.3"};
+
+  app.arguments = {};
+      app.controller = 'course/show';
+      app.mainScript = '/bundles/topxiaweb/js/app.js?4.9.3';
+</script>
+  <script src="./githubGuide/sea.js"></script>
+<script src="./githubGuide/seajs-style.js"></script>
+<script src="./githubGuide/seajs-global-config.js"></script>
+<script>
+  seajs.use(app.mainScript);
+</script><script charset="utf-8" async="" src="file:///bundles/topxiaweb/js/app.js?4.9.3"></script><script charset="utf-8" async="" src="file:///bundles/topxiaweb/js/app.js?4.9.3"></script><script charset="utf-8" async="" src="file:///bundles/topxiaweb/js/app.js?4.9.3"></script><script charset="utf-8" async="" src="file:///bundles/topxiaweb/js/app.js?4.9.3"></script><script charset="utf-8" async="" src="file:///bundles/topxiaweb/js/app.js?4.9.3"></script><script charset="utf-8" async="" src="./githubGuide/app.js"></script> 
+
+
+
+
+   
+ 
+  
+
+ 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/assets/html5shiv/3.7.2/html5shiv.min.js?4.9.3"></script>
+      <script src="/assets/respond.js/1.4.2/respond.min.js?4.9.3 "></script>
+    <![endif]-->
+
+
+
+
+
+
+
+  
+  
+<script charset="utf-8" async="" src="./githubGuide/jquery.js"></script><script charset="utf-8" async="" src="./githubGuide/bootstrap.js"></script><script charset="utf-8" async="" src="./githubGuide/bootstrap-modal-hack2.js"></script><script charset="utf-8" async="" src="./githubGuide/jquery.flexisel.js"></script><script charset="utf-8" async="" src="./githubGuide/show.js"></script><script charset="utf-8" async="" src="./githubGuide/timeleft.js"></script><script charset="utf-8" async="" src="./githubGuide/share.js"></script><script src="./githubGuide/share.js(1)"></script><link rel="stylesheet" href="./githubGuide/share_style0_24.css"><style type="text/css" id="MEIQIA-ICON-STYLE">.MEIQIA-ICON { background-size: 40px auto !important; background-repeat: no-repeat !important; background-image: url("http://static.meiqia.com/dist/images/icon-mq.png?v=a9fv8cfwv4klz0k9") !important; } @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) { .MEIQIA-ICON { background-image: url("http://static.meiqia.com/dist/images/icon-mq@2x.png?v=a9fv8cfwv4klz0k9") !important; } } .MEIQIA-ICON-CHAT1 { background-position: 0 0 !important; } .MEIQIA-ICON-CHAT2 { background-position: 0 -20px !important; } .MEIQIA-ICON-CHAT3 { background-position: 0 -40px !important; } .MEIQIA-ICON-CHAT4 { background-position: 0 -60px !important; } .MEIQIA-ICON-CHAT5 { background-position: 0 -80px !important; } .MEIQIA-ICON-CHAT6 { background-position: 0 -100px !important; } .MEIQIA-ICON-CHAT7 { background-position: 0 -120px !important; } .MEIQIA-ICON-CHAT8 { background-position: 0 -140px !important; } .MEIQIA-ICON-CHAT9 { background-position: 0 -160px !important; } .MEIQIA-ICON-CHAT10 { background-position: 0 -180px !important; } .MEIQIA-ICON-CHAT11 { background-position: 0 -200px !important; } .MEIQIA-ICON-CHAT12 { background-position: 0 -220px !important; } .MEIQIA-ICON-TICKET1 { background-position: -20px 0 !important; } .MEIQIA-ICON-TICKET2 { background-position: -20px -20px !important; } .MEIQIA-ICON-TICKET3 { background-position: -20px -40px !important; } .MEIQIA-ICON-TICKET4 { background-position: -20px -60px !important; } .MEIQIA-ICON-TICKET5 { background-position: -20px -80px !important; } .MEIQIA-ICON-TICKET6 { background-position: -20px -100px !important; } .MEIQIA-ICON-TICKET7 { background-position: -20px -120px !important; } .MEIQIA-ICON-TICKET8 { background-position: -20px -140px !important; } .MEIQIA-ICON-TICKET9 { background-position: -20px -160px !important; } .MEIQIA-ICON-TICKET10 { background-position: -20px -180px !important; } .MEIQIA-ICON-TICKET11 { background-position: -20px -200px !important; } .MEIQIA-ICON-TICKET12 { background-position: -20px -220px !important; } </style><style type="text/css" id="MEIQIA-PANEL-STYLE">#MEIQIA-PANEL-HOLDER { position: fixed; bottom: 0;  right: 60px;  z-index: -1; width: 320px; height: 480px; padding: 0; margin: 0; overflow: hidden; visibility: hidden; background-color: transparent; box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15); border: 1px solid #eee\0; *border: 1px solid #eee; } #MEIQIA-IFRAME { position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: none; width: 100% !important; height: 100% !important; border: 0; padding: 0; margin: 0; float: none; background: none; } </style><style type="text/css" id="MEIQIA-BTN-STYLE">#MEIQIA-BTN-HOLDER { display: none; position: fixed; bottom: 0;  right: 60px;  z-index: 2147483647; width: auto; height: auto; padding: 0; margin: 0; border: 0; font-family: 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background-color: transparent; } #MEIQIA-BTN, #MEIQIA-BTN span, #MEIQIA-BTN div, #MEIQIA-BTN img { float: none; width: auto; height: auto; padding: 0; margin: 0; border: 0; background: none; } #MEIQIA-BTN { display: block; height: 40px; font-size: 16px; color: #fff; text-align: center; border-left: 1px solid rgba(0, 0, 0, .1); border-top: 1px solid rgba(0, 0, 0, .1); border-right: 1px solid rgba(0, 0, 0, .1); box-shadow: 0 0 14px 0 rgba(0, 0, 0, .16); cursor: pointer; text-decoration: none; background-color: #1dce73; } #MEIQIA-BTN #MEIQIA-BTN-ICON { display: block; float: left; width: 20px; height: 20px; margin: 10px 10px 0; } #MEIQIA-BTN #MEIQIA-BTN-LINE { display: block; float: left; width: 1px; height: 100%; background-color: rgba(0, 0, 0, .08); background-color: #000\9; opacity: .1\9; filter: alpha(opacity=10)\9; vertical-align: middle; } #MEIQIA-BTN #MEIQIA-BTN-TEXT { display: block; float: left; height: 40px; margin: 0 10px; line-height: 40px; overflow-y: hidden; font-size: 16px; color: #fff; } #MEIQIA-BTN #MEIQIA-CIRCLE { position: absolute; top: -13px; left: -13px; display: none; width: 26px; height: 26px; text-align: center; line-height: 26px; font-size: 14px; color: #fff; border-radius: 15px; background-color: #ff3b30; } #MEIQIA-BTN #MEIQIA-BUBBLE { position: absolute; bottom: 64px; display: none; width: 260px; border: 1px solid #f7f7f7; border-radius: 4px; color: #000; text-align: left; box-shadow: 0 0 14px 0 rgba(0, 0, 0, .16); line-height: 1.428571429; background-color: #fff; } #MEIQIA-BTN #MEIQIA-BUBBLE-ARROW1 { position: absolute; z-index: 2; font-size: 0; line-height: 0; border-width: 8px 7px 0px; border-color: #fff transparent; border-style: solid dashed dashed; } #MEIQIA-BTN #MEIQIA-BUBBLE-ARROW2 { position: absolute; z-index: 1; font-size: 0; line-height: 0; border-width: 10px 8px 0px; border-color: #f7f7f7 transparent; border-style: solid dashed dashed; }  #MEIQIA-BTN #MEIQIA-BUBBLE { right: 0; } #MEIQIA-BTN #MEIQIA-BUBBLE-ARROW1 { right: 12px; bottom: -8px; } #MEIQIA-BTN #MEIQIA-BUBBLE-ARROW2 { right: 11px; bottom: -10px; }  #MEIQIA-BTN #MEIQIA-BUBBLE-CLOSE { position: absolute; display: none; top: 12px; right: 12px; width: 10px; height: 10px; background-position: -5px -245px; cursor: pointer; } #MEIQIA-BTN #MEIQIA-BUBBLE:hover #MEIQIA-BUBBLE-CLOSE { display: block; } #MEIQIA-BTN #MEIQIA-BUBBLE-INSIDE { margin: 12px 18px; } #MEIQIA-BTN #MEIQIA-BUBBLE-AVATAR { width: 26px; height: 26px; border-radius: 13px; margin-right: 6px; vertical-align: top; box-shadow: 0 0 8px 0 rgba(0, 0, 0, .15); } #MEIQIA-BTN #MEIQIA-BUBBLE-NAME { display: inline-block; margin-top: 3px; font-size: 16px; color: #000; } #MEIQIA-BTN #MEIQIA-BUBBLE-MSG { *height: 40px; max-height: 40px; margin-top: 5px; font-size: 14px; overflow: hidden; color: #000; } #MEIQIA-BTN #MEIQIA-BUBBLE-MSG img { width: 16px; height: 16px; } </style><style type="text/css" id="MEIQIA-INVITE-STYLE">#MEIQIA-INVITE, #MEIQIA-INVITE div, #MEIQIA-INVITE span, #MEIQIA-INVITE img { float: none; width: auto; height: auto; padding: 0; margin: 0; border: 0; background: none; } #MEIQIA-INVITE { position: fixed; top: 50%; left: 50%; display: none; z-index: 2147483647; width: 250px; height: 210px; margin: -105px 0 0 -125px; cursor: pointer; } #MEIQIA-INVITE #MEIQIA-INVITE-CLOSE { position: absolute; right: -20px; top: -20px; width: 40px; height: 40px; cursor: pointer;  background-position: 0 -260px;  } #MEIQIA-INVITE #MEIQIA-INVITE-CLOSE:hover {  background-position: 0 -300px;  } </style><link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style0_16.css?v=6aba13f0.css"><link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style0_16.css?v=6aba13f0.css"><style id="__web-inspector-hide-shortcut-style__" type="text/css">
+.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
+{
+    visibility: hidden !important;
+}
+</style><link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style0_16.css?v=6aba13f0.css"><link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style0_16.css?v=6aba13f0.css"><link rel="stylesheet" href="http://bdimg.share.baidu.com/static/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+<body screen_capture_injected="true" class="course-dashboard-page">
+
+  
+  <div class="nav-is-fixed">
+  <header class=" cd-main-header">
+
+   
+   <a class="cd-logo" href="#">
+   
+    
+    
+    </a>
+
+    <nav class="cd-nav">
+     <!-- primary-nav -->
+  </nav><ul class="cd-header-buttons">
+      <li><a class="cd-search-trigger" href="https://www.bing.com"><span></span></a></li>
+      <li><a class="cd-nav-trigger" href="#"><span></span></a></li>
+    </ul> <!-- cd-header-buttons -->
+  </header>
+</div>
+
+  <main class="cd-main-content">
+    <!-- your content here -->
+    
+
+    <div class="headempty"></div>
+    
+<link rel="stylesheet" href="./githubGuide/default.css">
+<script src="./githubGuide/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+   
+ <div class="bookcover">
+     <div class="img" style="background-image:url('/files/course/2015/06-10/18414155d688120543.jpg?4.9.3') !important">
+         <div class="img_mask"></div>
+         <div class="innercontainer">
+            <div class="title">
+               如何使用Git上传项目代码到github
+            </div>
+
+                
+   
+             <a href="#" class="category">DevOps</a>
+    
+            
+           
+         </div>
+
+         
+     </div>
+
+     
+
+    
+    </div><!--end of bookcover-->
+
+
+
+ 
+  
+
+    
+
+    <div class="container-fluid">
+     
+ <div class="coursewrap">
+
+
+
+
+    
+                
+                      <div class="section">
+                        <h1>如何使用Git上传项目代码到github</h1>
+                        <p><span style="color:rgb(64,64,64);">github是一个基于git的代码托管平台，付费用户可以建私人仓库，我们一般的免费用户只能使用公共仓库，也就是代码要公开。这对于一般人来说公共仓库就已经足够了。</span></p>
+
+<p><img alt="" src="./githubGuide/18421136f1a3134980.png"></p>
+
+                        </div>  
+    
+
+
+                           <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="1098" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>注册账户以及创建仓库</h2>
+                                        <p class="excerpt"> </p><p>要想使用github第一步当然是注册github账号了。之后就可以创建仓库了（免费用户只能建公共仓库），Create a New Repository，填好名称后Create，之后会出现一些仓库的配置信息，这也是一个git的简单教程。步骤如下：<br>
+&nbsp;</p>
+
+<p>打开<a href="https://github.com/" target="_blank">https://github.com</a>&nbsp;直接在首页上注册<br>
+<br>
+<a href="./githubGuide/170548c27e1b854772.png" target="_blank"><img alt="" src="./githubGuide/170548c27e1b854772.png"></a></p>
+
+<p><br>
+<br>
+点按钮注册成功之后，在页面上方用户菜单上选择 “+”-&gt;New repository&nbsp;创建一个新的仓库<br>
+<br>
+<a href="./githubGuide/17095640f213924273.png" target="_blank"><img alt="" src="./githubGuide/17095640f213924273.png"></a></p>
+
+<p><br>
+为仓库取一个名字，点击创建仓库按钮 你将成功创建一个仓库<br>
+<br>
+<a href="./githubGuide/17132882066d167248.png" target="_blank"><img alt="" src="./githubGuide/17132882066d167248.png"></a></p>
+<p></p>
+                    
+
+                 
+                </div>
+                                                   <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="1099" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>安装git客户端</h2>
+                                        <p class="excerpt"> </p><p>github是服务端，要想在自己电脑上使用git我们还需要一个git客户端，</p>
+
+<p>windows用户请下载&nbsp;<a href="http://msysgit.github.com/" style="color: rgb(0, 95, 169); line-height: 22.3999996185303px; padding: 0px; margin: 0px; text-decoration: none;" target="_blank">http://msysgit.github.com/</a></p>
+
+<p>mac用户请下载&nbsp;<a href="http://code.google.com/p/tortoisegit/" style="color: rgb(0, 95, 169); line-height: 22.3999996185303px; padding: 0px; margin: 0px; text-decoration: none;" target="_blank">http://code.google.com/p/tortoisegit/</a></p>
+
+<p>一路next，安装成功后， 回到C盘，或任何文件夹下，点鼠标右键会多出一些菜单<br>
+如 Git Init Hear、Git Bash、Git Gui ， 说明安装成功。</p>
+<p></p>
+                    
+
+                 
+                </div>
+                                                   <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="1100" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>配置Git</h2>
+                                        <p class="excerpt"> 
+
+    <title></title>
+
+
+</p><p>我们先在电脑硬盘里找一块地方存放本地仓库，比如我们把本地仓库建立在C:\MyRepository\1ke_test文件夹下</p>
+
+<p>进入1ke_test文件夹 鼠标右键操作如下步骤：</p>
+
+<p>1）在本地仓库里右键选择Git Init Here，会多出来一个.git文件夹，这就表示本地git创建成功。右键Git Bash进入git命令行，截图效果如下：</p>
+
+<p><img alt="" src="./githubGuide/175108c483fb671945.png"></p>
+
+<p>第一次在本地仓库操作需要先执行git init命令</p>
+
+<pre><code class="language-bash hljs">$ git init</code></pre>
+
+<p><img alt="" src="./githubGuide/18283539cfad664272.png"></p>
+
+<div>&nbsp;</div>
+
+<p>为了把本地的仓库传到github，还需要配置ssh key。</p>
+
+<p>2）在本地创建ssh key</p>
+
+<pre><code class="language-bash hljs">$ ssh-keygen -t rsa -C <span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string">"your_email@youremail.com"</span></span></span></span></span></span></code></pre>
+
+<p>后面的your_email@youremail.com改为你的邮箱。我的邮箱是lilu@1ke.co，也是在github上注册的那个邮箱：</p>
+
+<p><img alt="" src="./githubGuide/18094049ed5a347715.png"></p>
+
+<p>直接点回车，说明会在默认文件id_rsa上生成ssh key。&nbsp;</p>
+
+<p>然后系统要求输入密码，直接按回车表示不设密码<br>
+<img alt="" src="./githubGuide/17570733fea2742062.png"></p>
+
+<p>重复密码时也是直接回车，之后提示你shh key已经生成成功。</p>
+
+<p><img alt="" src="./githubGuide/1811142d4ce9788031.png"></p>
+
+<p>&nbsp;</p>
+
+<p>然后我们进入提示的地址下查看ssh key文件。 我的电脑的地址是C:\Users\<strong>lilu</strong>\.ssh ，其中lilu是我的电脑的名称<br>
+<img alt="" src="./githubGuide/18003428276f033698.png"></p>
+
+<p>打开id_rsa.pub，复制里面的key。里面的key是一对看不懂的字符数字组合，不用管它，直接复制。</p>
+
+<p>&nbsp;</p>
+
+<p>回到github网站，进入Account Settings，左边选择SSH Keys，Add SSH Key,</p>
+
+<p><a href="./githubGuide/18040663f13e163573.png" target="_blank"><img alt="" src="./githubGuide/18040663f13e163573.png"></a></p>
+
+<p>title随便填，粘贴key。</p>
+
+<p><img alt="" src="./githubGuide/18124918c556633334.png"></p>
+
+<p>&nbsp;</p>
+
+<p>3）验证是否成功，在git bash下输入</p>
+
+<pre><code class="language-bash hljs">$ ssh -T git@github.com</code></pre>
+
+<p>回车就会看到：You’ve successfully authenticated, but GitHub does not provide shell access 。这就表示已成功连上github。</p>
+
+<p><img alt="" src="./githubGuide/18141358d223257547.png"></p>
+
+<p>4）接下来我们要做的就是把本地仓库传到github上去，在此之前还需要设置username和email，因为github每次commit都会记录他们</p>
+
+<pre><code class="language-bash hljs">$ git config --global user.name <span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string">"your name"</span></span></span></span></span></span>
+$ git config --global user.email <span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string">"your_email@youremail.com"</span></span></span></span></span></span></code></pre>
+
+<p>分别输入上述命令行 回车， 我的界面显示如下<br>
+<img alt="" src="./githubGuide/1816524de546595658.png"></p>
+
+<p>5）进入要上传的仓库，右键git bash，添加远程地址</p>
+
+<pre><code class="language-bash hljs">$ git remote add origin git@github.com:yourName/yourRepo.git</code></pre>
+
+<p>后面的yourName和yourRepo表示你再github的用户名和刚才新建的仓库，加完之后进入.git，打开config，这里会多出一个remote “origin”内容，这就是刚才添加的远程地址，也可以直接修改config来配置远程地址。</p>
+
+<p><img alt="" src="./githubGuide/1821542ecfe9083022.png"></p>
+
+<p>与github上的对应<br>
+<img alt="" src="./githubGuide/1823037aa1ed043887.png"></p>
+
+<p>&nbsp;</p>
+
+
+<p></p>
+                    
+
+                 
+                </div>
+                                                   <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="1101" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>提交上传</h2>
+                                        <p class="excerpt"> </p><p>&nbsp;</p>
+
+<p>1）接下来在本地仓库里添加一些文件，比如README</p>
+
+<p>在本地新建一个README文件<br>
+<img alt="" src="./githubGuide/183003b8e527974368.png"></p>
+
+<p>然后在命令行输入一下命令</p>
+
+<pre><code class="language-bash hljs">$ git add README
+
+$ git commit -m <span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string"><span class="hljs-string">"first commit"</span></span></span></span></span></span></code></pre>
+
+<p>我的执行界面如下<br>
+<img alt="" src="./githubGuide/183203309ad2517953.png"></p>
+
+<p>2）上传到github&nbsp;</p>
+
+<pre><code class="language-bash hljs">$ git push origin master</code></pre>
+
+<p>git push命令会将本地仓库推送到远程服务器。</p>
+
+<p>git pull命令则相反。</p>
+
+<p>注：首次提交，先git pull下，修改完代码后，使用git status可以查看文件的差别，使用git add 添加要commit的文件。</p>
+
+<p>&nbsp;</p>
+
+<p>大功告成，现在你知道如何将本地的项目提交到github上了。</p>
+<p></p>
+                    
+
+                 
+                </div>
+                                                   <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="1102" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>gitignore文件</h2>
+                                        <p class="excerpt"> </p><p><span style="color:rgb(2, 2, 2)">.gitignore顾名思义就是告诉git需要忽略的文件，这是一个很重要并且很实用的文件。一般我们写完代码后会执行编译、调试等操作，这期间会产生很多中间文件和可执行文件，这些都不是代码文件，是不需要git来管理的。我们在git status的时候会看到很多这样的文件，如果用git add -A来添加的话会把他们都加进去，而手动一个个添加的话也太麻烦了。这时我们就需要.gitignore了。</span></p>
+<p></p>
+                    
+
+                 
+                </div>
+                                                   <div class="section">
+                
+                    <h2> <div class="pull-right">
+            <button class="btn btn-primary finish-btn" data-role="finish-lesson" data-id="859" style="display:none;"><span class="glyphicon glyphicon-unchecked"></span> 学过了</button>
+          </div>Git命令</h2>
+                                        <p class="excerpt"> </p><p><strong>查看、添加、提交、删除、找回，重置修改文件</strong></p>
+
+<pre><code class="language-bash hljs">git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">help</span></span></span></span></span></span> &lt;<span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">command</span></span></span></span></span></span>&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 显示command的help</span></span></span></span></span></span>
+
+git show <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 显示某次提交的内容 git show $id</span></span></span></span></span></span>
+
+git co -- &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 抛弃工作区修改</span></span></span></span></span></span>
+
+git co . <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 抛弃工作区修改</span></span></span></span></span></span>
+
+git add &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将工作文件修改提交到本地暂存区</span></span></span></span></span></span>
+
+git add . <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将所有修改过的工作文件提交暂存区</span></span></span></span></span></span>
+
+git rm &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 从版本库中删除文件</span></span></span></span></span></span>
+
+git rm &lt;file&gt; --cached <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 从版本库中删除文件，但不删除文件</span></span></span></span></span></span>
+
+git reset &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 从暂存区恢复到工作文件</span></span></span></span></span></span>
+
+git reset -- . <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 从暂存区恢复到工作文件</span></span></span></span></span></span>
+
+git reset --hard <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改</span></span></span></span></span></span>
+
+git ci &lt;file&gt; git ci . git ci <span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator">-a</span></span></span></span></span></span> <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将git add, git rm和git ci等操作都合并在一起做　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　git ci -am "some comments"</span></span></span></span></span></span>
+
+git ci --amend <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 修改最后一次提交记录</span></span></span></span></span></span>
+
+git revert &lt;<span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable">$id</span></span></span></span></span></span>&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 恢复某次提交的状态，恢复动作本身也创建次提交对象</span></span></span></span></span></span>
+
+git revert HEAD <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 恢复最后一次提交的状态</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<strong>查看文件diff</strong></p>
+
+<pre><code class="language-bash hljs">git diff &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 比较当前文件和暂存区文件差异 git diff</span></span></span></span></span></span>
+
+git diff &lt;id1&gt;&lt;id2&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 比较两次提交之间的差异</span></span></span></span></span></span>
+
+git diff &lt;branch1&gt;..&lt;branch2&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 在两个分支之间比较</span></span></span></span></span></span>
+
+git diff --staged <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 比较暂存区和版本库差异</span></span></span></span></span></span>
+
+git diff --cached <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 比较暂存区和版本库差异</span></span></span></span></span></span>
+
+git diff --stat <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 仅仅比较统计信息</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<br>
+<br>
+<strong>查看提交记录</strong></p>
+
+<pre><code class="language-bash hljs">git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">log</span></span></span></span></span></span> git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">log</span></span></span></span></span></span> &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看该文件每次提交记录</span></span></span></span></span></span>
+
+git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">log</span></span></span></span></span></span> -p &lt;file&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看每次详细修改内容的diff</span></span></span></span></span></span>
+
+git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">log</span></span></span></span></span></span> -p -<span class="hljs-number"><span class="hljs-number"><span class="hljs-number"><span class="hljs-number"><span class="hljs-number"><span class="hljs-number">2</span></span></span></span></span></span> <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看最近两次详细修改内容的diff</span></span></span></span></span></span>
+
+git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">log</span></span></span></span></span></span> --stat <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment">#查看提交统计信息</span></span></span></span></span></span>
+</code></pre>
+
+<p><br>
+<strong>tig</strong><br>
+<span style="color:#FF0000">Mac上可以使用tig代替diff和log，brew install tig</span><br>
+<br>
+<br>
+<strong>Git 本地分支管理<br>
+查看、切换、创建和删除分支</strong></p>
+
+<pre><code class="language-bash hljs">git br -r <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看远程分支</span></span></span></span></span></span>
+
+git br &lt;new_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 创建新的分支</span></span></span></span></span></span>
+
+git br -v <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看各个分支最后提交信息</span></span></span></span></span></span>
+
+git br --merged <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看已经被合并到当前分支的分支</span></span></span></span></span></span>
+
+git br --no-merged <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看尚未被合并到当前分支的分支</span></span></span></span></span></span>
+
+git co &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 切换到某个分支</span></span></span></span></span></span>
+
+git co -b &lt;new_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 创建新的分支，并且切换过去</span></span></span></span></span></span>
+
+git co -b &lt;new_branch&gt; &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 基于branch创建新的new_branch</span></span></span></span></span></span>
+
+git co <span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable">$id</span></span></span></span></span></span> <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</span></span></span></span></span></span>
+
+git co <span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable"><span class="hljs-variable">$id</span></span></span></span></span></span> -b &lt;new_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 把某次历史提交记录checkout出来，创建成一个分支</span></span></span></span></span></span>
+
+git br <span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator"><span class="hljs-operator">-d</span></span></span></span></span></span> &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 删除某个分支</span></span></span></span></span></span>
+
+git br -D &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 强制删除某个分支 (未被合并的分支被删除的时候需要强制)</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<br>
+<strong>&nbsp;分支合并和rebase</strong></p>
+
+<pre><code class="language-bash hljs">git merge &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将branch分支合并到当前分支</span></span></span></span></span></span>
+
+git merge origin/master --no-ff <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 不要Fast-Foward合并，这样可以生成merge提交</span></span></span></span></span></span>
+
+git rebase master &lt;branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将master rebase到branch，相当于： git co &lt;branch&gt; &amp;&amp; git rebase master &amp;&amp; git co master &amp;&amp; git merge &lt;branch&gt;</span></span></span></span></span></span>
+</code></pre>
+
+<p><br>
+<br>
+<strong>&nbsp;Git补丁管理(方便在多台机器上开发同步时用)</strong></p>
+
+<pre><code class="language-bash hljs">git diff &gt; ../sync.patch <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 生成补丁</span></span></span></span></span></span>
+
+git apply ../sync.patch <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 打补丁</span></span></span></span></span></span>
+
+git apply --check ../sync.patch <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment">#测试补丁能否成功</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<br>
+<br>
+<strong>&nbsp;Git暂存管理</strong></p>
+
+<pre><code class="language-bash hljs">git stash <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 暂存</span></span></span></span></span></span>
+
+git stash list <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 列所有stash</span></span></span></span></span></span>
+
+git stash apply <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 恢复暂存的内容</span></span></span></span></span></span>
+
+git stash drop <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 删除暂存区</span></span></span></span></span></span>
+
+Git远程分支管理
+
+git pull <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 抓取远程仓库所有分支更新并合并到本地</span></span></span></span></span></span>
+
+git pull --no-ff <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 抓取远程仓库所有分支更新并合并到本地，不要快进合并</span></span></span></span></span></span>
+
+git fetch origin <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 抓取远程仓库更新</span></span></span></span></span></span>
+
+git merge origin/master <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将远程主分支合并到本地当前分支</span></span></span></span></span></span>
+
+git co --track origin/branch <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 跟踪某个远程分支创建相应的本地分支</span></span></span></span></span></span>
+
+git co -b &lt;<span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">local</span></span></span></span></span></span>_branch&gt; origin/&lt;remote_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 基于远程分支创建本地分支，功能同上</span></span></span></span></span></span>
+</code></pre>
+
+<p><br>
+<br>
+<strong>git push # push所有分支</strong></p>
+
+<pre><code class="language-bash hljs">git push origin master <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将本地主分支推到远程主分支</span></span></span></span></span></span>
+
+git push -u origin master <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</span></span></span></span></span></span>
+
+git push origin &lt;<span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">local</span></span></span></span></span></span>_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 创建远程分支， origin是远程仓库名</span></span></span></span></span></span>
+
+git push origin &lt;<span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">local</span></span></span></span></span></span>_branch&gt;:&lt;remote_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 创建远程分支</span></span></span></span></span></span>
+
+git push origin :&lt;remote_branch&gt; <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment">#先删除本地分支(git br -d &lt;branch&gt;)，然后再push删除远程分支</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<br>
+<br>
+<strong>Git远程仓库管理</strong></p>
+
+<pre><code class="language-bash hljs">git remote -v <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看远程服务器地址和仓库名称</span></span></span></span></span></span>
+
+git remote show origin <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 查看远程服务器仓库状态</span></span></span></span></span></span>
+
+git remote add origin git@ github:robbin/robbin_site.git <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 添加远程仓库地址</span></span></span></span></span></span>
+
+git remote <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">set</span></span></span></span></span></span>-url origin git@ github.com:robbin/robbin_site.git <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 设置远程仓库地址(用于修改远程仓库地址) git remote rm &lt;repository&gt; # 删除远程仓库</span></span></span></span></span></span>
+</code></pre>
+
+<p><br>
+<br>
+<strong>创建远程仓库</strong></p>
+
+<pre><code class="language-bash hljs">git <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">clone</span></span></span></span></span></span> --bare robbin_site robbin_site.git <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 用带版本的项目创建纯版本仓库</span></span></span></span></span></span>
+
+scp -r my_project.git git@ git.csdn.net:~ <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 将纯仓库上传到服务器上</span></span></span></span></span></span>
+
+mkdir robbin_site.git &amp;&amp; <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">cd</span></span></span></span></span></span> robbin_site.git &amp;&amp; git --bare init <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 在服务器创建纯仓库</span></span></span></span></span></span>
+
+git remote add origin git@ github.com:robbin/robbin_site.git <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 设置远程仓库地址</span></span></span></span></span></span>
+
+git push -u origin master <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 客户端首次提交</span></span></span></span></span></span>
+
+git push -u origin develop <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 首次将本地develop分支提交到远程develop分支，并且track</span></span></span></span></span></span>
+
+git remote <span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in"><span class="hljs-built_in">set</span></span></span></span></span></span>-head origin master <span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"><span class="hljs-comment"># 设置远程仓库的HEAD指向master分支</span></span></span></span></span></span></code></pre>
+
+<p><br>
+<br>
+<br>
+<strong>也可以命令设置跟踪远程库和本地库</strong></p>
+
+<pre><code class="language-bash hljs">git branch --set-upstream master origin/master
+
+git branch --set-upstream develop origin/develop
+</code></pre>
+
+<div>&nbsp;</div>
+<p></p>
+                    
+
+                 
+                </div>
+                             
+
+              
+
+    
+
+
+
+             
+           
+       
+           
+
+
+
+
+
+
+
+
+
+
+                             <div class="homepage tag">
+                    <div class="biaoqian">更多：</div>                        <a href="https://www.google.com.hk" class="btn btn-default">Google</a>
+                                                <a href="https://stackoverflow.com/" class="btn btn-default">Stackoverflow</a>
+                                                <a href="https://github.com" class="btn btn-default">Github</a>
+                                                </div>
+    
+
+
+
+</div>
+
+<div class="container-fluid">
+        
+    </div>
+
+    <div class="container-fluid">
+     <!-- remove fixbootom http://1ke.co/ -->
+ </div>
+
+
+
+
+    
+
+
+    </div> <!-- /container -->
+
+
+
+     
+
+
+   
+
+
+    
+  
+    <div class="cd-overlay"></div>
+  </main>
+
+   <!-- cd-nav -->
+
+  <div id="cd-search" class="cd-search">
+    <form>
+      <input type="search" placeholder="输入想学的技能..." id="searchkeyword">
+      
+    </form>
+  </div>
+
+
+  
+ <div class="fixbottom">
+
+        <ul>
+           <li><a href="http://1ke.co/course/194#threads" class="fa fa-comment-o"></a></li>
+           <li>     <a class="fa fa-bookmark-o" id="course-buy-btn" href="http://1ke.co/course/194#modal" data-toggle="modal" data-url="/course/194/buy?targetType=course"></a>
+  </li>
+           <li>
+           <a id="favorite-btn-3" href="javascript:" data-url="/course/194/favorite" class="fa fa-heart-o"></a>   
+
+           <a id="unfavorite-btn-3" href="javascript:" data-url="/course/194/unfavorite" style="display:none;" class="fa fa-heart"></a>   </li>
+
+
+          <li> 
+
+          <div class="share pull-top clearfix " id="bottom-share" data-bdtext=""></div>
+                  
+          </li>
+        </ul>
+    </div>
+ 
+<div id="course-modal" class="modal"></div>
+<div id="course-edit-modal" class="modal"></div>
+<div id="modal-pay" class="modal"></div>
+<div id="login-modal" class="modal" data-url="/login/ajax"></div>
+<div id="study-modal" class="modal" data-url="/login/ajax"></div>
+<div id="modal" class="modal"></div>
+
+
+
+
+
+<script type="text/javascript">
+    (function(m, ei, q, i, a, j, s) {
+        m[a] = m[a] || function() {
+            (m[a].a = m[a].a || []).push(arguments)
+        };
+        j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.src = i;
+        s.parentNode.insertBefore(j, s)
+    })(window, document, 'script', '//eco-api.meiqia.com/dist/meiqia.js', '_MEIQIA');
+    _MEIQIA('entId', 2993);
+</script>
+
+
+</body></html>
