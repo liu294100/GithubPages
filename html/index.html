@@ -1,52 +1,210 @@
-
 <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Examples</title>
-      <meta name="description" content="">
-      <meta name="keywords" content="">
-      <link href="https://static.segmentfault.com/v-58f8626d/global/css/global.css" rel="stylesheet">
-	  <style type="text/css">
-	  	*{margin:0px; }
-		#hello,#hello_tip{
-			color: red;text-align: center;font-size: 22px;
-		}
-		.bottom_psotion{
-			position:absolute;bottom:0;width:100%;height:100px;background-color: #89d1e6;
-		}
-		.div_center_v{
-			text-align:center;
-		}
-		#copyright{
-			margin:40px auto 0 auto;
-		}
-	  </style>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
 
-    </head>
-    <body>
-    	<div class="top_postion">
-	        <p id="hello">Hello Github Pages!</p>
-	        <p id="hello_tip">~~~~~~~~~~~~~~~</p>
+    <title>Search Projects in Github</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://static.segmentfault.com/v-58f8626d/global/css/global.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/bootstrap/ie10-viewport-bug-workaround.css" rel="stylesheet">   <!-- <link href="http://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="css/bootstrap/jumbotron.css" rel="stylesheet">   <!-- <link href="http://v3.bootcss.com/examples/jumbotron/jumbotron.css" rel="stylesheet"> -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/bootstrap/ie-emulation-modes-warning.js"></script>     <!-- <script src="http://v3.bootcss.com/assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- reactjs -->
+    <script src="../js/react/react.js"></script>
+    <script src="../js/react/react-dom.js"></script>
+    <!-- babel react -->
+    <script src="../js/react/browser.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+   <style type="text/css">
+       #sSearch{
+          border-radius: 3px;
+        }
+    </style>
+
+  </head>
+
+  <body>
+    <!--[if lt IE 10]>
+      <p class="chromeframe" style="margin-left:15%;margin-right:15%;">您使用的IE浏览器版本过低，本站不再支持，<a href="http://windows.microsoft.com/">升级您的IE浏览器</a>，或使用<a href="https://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html?standalone=1">Google Chrome</a>、<a href="https://www.mozilla.org/zh-CN/firefox/new/">Firefox</a>等高级浏览器，将会得到更好的体验！</p>
+   <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Github Project Search</a>
         </div>
-        <div class="mid_postion">
-        	<div class="div_center_v">
-				<p  style="font-size: 36px;margin-top: 50px;">Cooming Soon!!!</p>
-				<p  style="font-size: 36px;margin-top: 50px;">Thanks Your Supports!!!</p>         		
-        	</div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <a href="#" class="form-control btn btn-success ">Home</a>
+            </div>
+            <div class="form-group">
+              <a href="#" class="form-control btn btn-success">Branch</a>
+            </div>
+            <a href="#" class="form-control btn btn-success">More</a>
+            <!-- <a href="http://www.imooc.com/article/1323">热门响应式前端框架 书签注释</a> -->
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2 title="搜索Github上比较流行的项目 ">Search Projects in Github</h2>
+
+            <div class="col-md-12" style="background-color:#fff;padding:0px;">
+            <input class="col-lg-11" id="sSearch" type="text" name="" value="" class="form-control" style="border:0px;background-color:transparent;height: 42px;">
+            <input type="hidden" id="sSearchHiden" value="">
+            <a class="col-md-1 btn btn-primary btn-lg glyphicon glyphicon-search pull-right " href="#" role="button" onclick="getSearchValues()" style="position: relative;"></a>
+          </div>
+
+        <!-- <p><a class="btn btn-primary btn-lg glyphicon glyphicon-search" href="#" role="button"> &raquo;</a></p> -->
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <h2>Most Popular JavaScript Projects in Github</h2> -->
+          <p id="showSomeStarProject">
+          </p>
+          <p><a class="btn btn-default glyphicon glyphicon-arrow-up" href="#" role="button">TOP</a></p>
         </div>
-        <div class="bottom_psotion">
-        	<div class="div_center_v">
-        		<p id="introduce">
-        		Follow Us<a title="Facebook" class="opacity25 icon-sn-facebook" href="https://www.facebook.com" target="_blank"></a>
-        			<a title="Twitter" class="icon-sn-twitter" href="https://twitter.com/FuryleeU/" target="_blank"></a>
-        			<a title="Google+" class="icon-sn-google" href="https://plus.google.com" target="_blank"></a>
-        			<a title="Weibo" class="icon-sn-weibo" href="http://weibo.com/u/3852677251" target="_blank"></a>
-        			<a title="QQ" class="icon-sn-qq" href="http://www.qq.com" target="_blank"></a>
-        		</p>
-        		<p id="copyright">Copyright © 1998 - 2017 GithubPages. All Rights Reserved</p>
-        	</div>
-        </div>
-    </body>
+
+      </div>
+
+      <hr>
+
+      <footer>
+        <!-- <p>&copy; 2016 Company, Inc.</p> -->
+          <div class="div_center_v">
+          		<p id="introduce">
+          		Follow Us<a title="Facebook" class="opacity25 icon-sn-facebook" href="https://www.facebook.com" target="_blank"></a>
+          			<a title="Twitter" class="icon-sn-twitter" href="https://twitter.com/FuryleeU/" target="_blank"></a>
+          			<a title="Google+" class="icon-sn-google" href="https://plus.google.com" target="_blank"></a>
+          			<a title="Weibo" class="icon-sn-weibo" href="http://weibo.com/u/3852677251" target="_blank"></a>
+          			<a title="Github" class="icon-sn-github" href="https://github.com" target="_blank"></a>
+          		</p>
+          		  <p id="copyright">Copyright © 1998 - 2017 GithubPages. All Rights Reserved</p>
+            </div>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>  <!-- <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script type="text/javascript">
+      var hostDomainsPage='file:///E:/Github/GithubPages/html/index.html?query=';
+      function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+        return unescape(r[2]);
+        }
+        return null;
+      }
+      var getSearchValues=function(){
+        var getSearchVal= $("#sSearch").val();
+         // window.location.href='file:///E:/Github/GithubPages/html/index.html?query='+getSearchVal;
+          window.location.href='https://liu294100.github.io/GithubPages/html/index.html?query='+getSearchVal;
+      }
+      var githubValStr='https://api.github.com/search/repositories?q=javascript&sort=stars';
+      $(function(){
+        var queryValue;
+        if(getQueryString('query')){
+          queryValue=getQueryString('query');
+        }else {
+          queryValue='java';
+        }
+        $("#sSearch").val(queryValue);
+        githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
+      })
+
+    </script>
+    <!-- React dom render -->
+    <script type="text/babel">
+      var RepoList = React.createClass({
+       getInitialState: function() {
+         return {
+           loading: true,
+           error: null,
+           data: null
+         };
+       },
+
+       componentDidMount() {
+         this.props.promise.then(
+           value => this.setState({loading: false, data: value}),
+           error => this.setState({loading: false, error: error}));
+       },
+
+         render: function() {
+           if (this.state.loading) {
+             return <span>Loading...</span>;
+           }
+           else if (this.state.error !== null) {
+             return <span>Error: {this.state.error.message}</span>;
+           }
+           else {
+             var repos = this.state.data.items;
+             console.log(getQueryString('query'));
+             var projectSearchName=getQueryString('query');
+             var repoList = repos.map(function (repo, index) {
+               return (
+                 <li key={index}><a href={repo.html_url}>{repo.name}</a> ({repo.stargazers_count} stars) <br/> {repo.description}</li>
+               );
+             });
+             return (
+               <main>
+                 <h2 >Most Popular {projectSearchName} Projects in Github</h2>
+                 <ol>{repoList}</ol>
+               </main>
+             );
+           }
+         }
+        });
+
+      ReactDOM.render(
+
+       <RepoList promise={$.getJSON(githubValStr)} />,
+       document.getElementById('showSomeStarProject')
+      );
+   </script>
+
+  </body>
 </html>
