@@ -146,21 +146,19 @@
           window.location.href='https://liu294100.github.io/GithubPages/html/index.html?query='+getSearchVal;
       }
       var githubValStr='https://api.github.com/search/repositories?q=javascript&sort=stars';
-
+      var queryValue;
+      if(getQueryString('query')){
+        queryValue=getQueryString('query');
+      }else {
+        queryValue='java';
+      }
+      $("#sSearch").val(queryValue);
+     var  githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
     </script>
     <!-- React dom render -->
     <script type="text/babel">
       var RepoList = React.createClass({
        getInitialState: function() {
-         var queryValue;
-         if(getQueryString('query')){
-           queryValue=getQueryString('query');
-         }else {
-           queryValue='java';
-         }
-         $("#sSearch").val(queryValue);
-         githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
-
          return {
            loading: true,
            error: null,
@@ -168,6 +166,12 @@
          };
        },
 
+       componentWillMount: function(){
+         // 初始化期，组件加载前调用
+      },
+      componentWillUpdate: function(){
+        // 存在期，组件状态改变后重新渲染前调用
+      },
        componentDidMount() {
          this.props.promise.then(
            value => this.setState({loading: false, data: value}),
@@ -183,7 +187,6 @@
            }
            else {
              var repos = this.state.data.items;
-             console.log(getQueryString('query'));
              var projectSearchName=getQueryString('query');
              var repoList = repos.map(function (repo, index) {
                return (
