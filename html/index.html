@@ -129,7 +129,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>  <!-- <script src="http://v3.bootcss.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script type="text/javascript">
-      var hostDomainsPage='file:///E:/Github/GithubPages/html/index.html?query=';
       function getQueryString(name) {
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
         var r = window.location.search.substr(1).match(reg);
@@ -144,22 +143,21 @@
           window.location.href='https://liu294100.github.io/GithubPages/html/index.html?query='+getSearchVal;
       }
       var githubValStr='https://api.github.com/search/repositories?q=javascript&sort=stars';
-      $(function(){
-        var queryValue;
-        if(getQueryString('query')){
-          queryValue=getQueryString('query');
-        }else {
-          queryValue='java';
-        }
-        $("#sSearch").val(queryValue);
-        githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
-      })
 
     </script>
     <!-- React dom render -->
     <script type="text/babel">
       var RepoList = React.createClass({
        getInitialState: function() {
+         var queryValue;
+         if(getQueryString('query')){
+           queryValue=getQueryString('query');
+         }else {
+           queryValue='java';
+         }
+         $("#sSearch").val(queryValue);
+         githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
+
          return {
            loading: true,
            error: null,
