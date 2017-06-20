@@ -81,10 +81,13 @@
       <div class="container">
         <h2 title="搜索Github上比较流行的项目 ">Search Projects in Github</h2>
 
-            <div class="col-md-12" style="background-color:#fff;padding:0px;">
-            <input class="col-lg-11" id="sSearch" type="text" name="" value="" class="form-control" style="border:0px;background-color:transparent;height: 42px;">
-            <input type="hidden" id="sSearchHiden" value="">
-            <a class="col-md-1 btn btn-primary btn-lg glyphicon glyphicon-search pull-right " href="#" role="button" onclick="getSearchValues()" style="position: relative;"></a>
+            <div class="col-md-12" >
+              <div class="input-group ">
+                  <input type="text" id="sSearch" class="form-control" placeholder="java" aria-describedby="basic-addon2">
+                  <a class="input-group-addon btn btn-primary btn-lg glyphicon glyphicon-search"
+                  id="basic-addon2"  role="button" onclick="getSearchValues()" href="#" style="top:0px;"></a>
+              </div>
+                  <input type="hidden" id="sSearchHiden" value="">
           </div>
 
         <!-- <p><a class="btn btn-primary btn-lg glyphicon glyphicon-search" href="#" role="button"> &raquo;</a></p> -->
