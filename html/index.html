@@ -146,14 +146,9 @@
           window.location.href='https://liu294100.github.io/GithubPages/html/index.html?query='+getSearchVal;
       }
       var githubValStr='https://api.github.com/search/repositories?q=javascript&sort=stars';
-      var queryValue;
-      if(getQueryString('query')){
-        queryValue=getQueryString('query');
-      }else {
-        queryValue='java';
-      }
+      var queryValue=getQueryString('query')==undefined?'java':getQueryString('query');
       $("#sSearch").val(queryValue);
-     var  githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
+      var  githubValStr='https://api.github.com/search/repositories?q='+queryValue+'&sort=stars';
     </script>
     <!-- React dom render -->
     <script type="text/babel">
