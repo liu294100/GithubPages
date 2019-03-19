@@ -1,6 +1,8 @@
-# bilibili-haruna
+# bilibili-2333 live2d
 
-> B站看板娘集合 (live2d)
+> 🍭 Wow, B站看板娘集合 (live2d)
+
+[![Travis](https://camo.githubusercontent.com/155349b6dffc359cad44a35da55ad4284d25c56d/68747470733a2f2f696d672e736869656c64732e696f2f7472617669732f4d6f65506c617965722f44506c617965722e7376673f7374796c653d666c61742d737175617265)](https://travis-ci.org/MoePlayer/DPlayer) [![devDependency Status](https://camo.githubusercontent.com/261ebff3124a49f39b07e9b40cc3f91f14006843/68747470733a2f2f696d672e736869656c64732e696f2f64617669642f6465762f4d6f65506c617965722f64706c617965722e7376673f7374796c653d666c61742d737175617265)](https://david-dm.org/MoePlayer/DPlayer#info=devDependencies)
 
 ## 介绍
 
@@ -12,6 +14,8 @@
 
 > PS: urls.txt 文件就是从B站直播间的 model 里找的资源，如果你发现新的资源，请 pr 或联系我更新。
 
+ 源于https://github.com/52cik/bilibili-haruna提供，进行修改！  
+
 ## 更新
 
 > 2018-11-22 更新 bls 冬装  
@@ -19,3 +23,7 @@
 
 > 2018-03-31 更新  
 > 写了 [fetch.js](fetch.js) 脚本爬取了 <https://live.bilibili.com/> 100页分页，最终得到的目前最新集合。
+
+### More
+
+powerd by  52cik  xiazeyu
