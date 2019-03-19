@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>B站看板娘集合</title>
+  <link href="res/bulma/0.6.2/css/bulma.min.css" rel="stylesheet">
+  <style>
+    #app .list {
+      width: 200px;
+    }
+    #app .list li {
+      margin-bottom: 10px;
+    }
+
+    #app .wrap {
+      display: flex;
+    }
+
+    .github {
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
+
+    .github svg {
+      fill: #e1e1e1;
+      color: #000;
+      position: absolute;
+      top: 0;
+      border: 0;
+      right: 0;
+      z-index: 99;
+      width: 4.375rem;
+      height: 4.375rem;
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://github.com/52cik/bilibili-haruna" target="_blank" class="github"><svg viewBox="0 0 250 250"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm" style="transform-origin: 130px 106px 0px;"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+      <p class="title">
+        bilibili 看板娘集合 (22娘，33娘)
+      </p>
+      <p class="subtitle">
+        基于 GitHub Pages 预览，资源加载可能略慢，请耐心等待。
+      </p>
+    </div>
+  </div>
+</section>
+
+<div id="app" class="section" v-cloak>
+  <div class="container">
+    <h2 class="subtitle">点击更换服装</h2>
+    
+    <div class="wrap">
+      <ul class="list">
+        <li @click="randomModel('22')"><a class="button is-info is-small is-outlined">【22娘随机换装】</a></li>
+        <li v-for="it of list22" @click="selectModel(it)"><a class="button is-info is-small is-outlined">{{ it.name }}</a></li>
+      </ul>
+
+      <ul class="list">
+          <li @click="randomModel('33')"><a class="button is-info is-small is-outlined">【33娘随机换装】</a></li>
+        <li v-for="it of list33" @click="selectModel(it)"><a class="button is-info is-small is-outlined">{{ it.name }}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="res/jquery/2.2.4/jquery.min.js"></script>
+<script src="res/vue/2.5.13/vue.min.js"></script>
+<script src="assets/live2d-widget/L2Dwidget.min.js"></script>
+<script>
+
+function init(model) {
+  L2Dwidget.init({
+    model: {
+      jsonPath: model
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1
+    }
+  });
+}
+
+
+var textures = [];
+$.getJSON('assets/haruna/textures.json', function(data){
+  textures = data;
+});
+
+function randomTexture(type) {
+  var list = textures.filter(function(it) {
+    return it.indexOf('texture_0' + type) > 0;
+  });
+  var idx = Math.random() * list.length | 0;
+  return list[idx];
+}
+
+function randomModel(type) {
+  // var url = location.origin + '/bilibili-haruna/assets/haruna/'+ type;
+  //var url = location.origin + 'assets/haruna/'+ type;
+  var url = location.origin +location.pathname+ 'assets/haruna/'+ type;
+  // http://www.52cik.com/bilibili-haruna/assets/haruna/22/22.v2.moc
+  // http://www.52cik.com/bilibili-haruna/assets/haruna/22/motions/22.v2.idle-01.mtn
+  // http://www.52cik.com/bilibili-haruna/assets/haruna/22/22.1024/closet.default.v2/texture_00.png
+  var model = {
+    type: 'Live2D Model Setting',
+    name: type + '-random-model',
+    label: type,
+    model: url + '/' + type + '.v2.moc',
+    textures: [
+      url + '/' + type + '.1024/closet.default.v2/texture_00.png',
+      url + '/' + type + '.1024/' + randomTexture(1),
+      url + '/' + type + '.1024/' + randomTexture(2),
+      url + '/' + type + '.1024/' + randomTexture(3),
+    ],
+    layout: { center_x: 0, center_y: 0.1, width: 2.3, height: 2.3 },
+    motions: {
+      idle: [
+        {
+          file: url + '/motions/' + type + '.v2.idle-01.mtn',
+          fade_in: 2000,
+          fade_out: 2000,
+        },
+        {
+          file: url + '/motions/' + type + '.v2.idle-02.mtn',
+          fade_in: 2000,
+          fade_out: 2000,
+        },
+        {
+          file: url + '/motions/' + type + '.v2.idle-03.mtn',
+          fade_in: 100,
+          fade_out: 100,
+        },
+      ],
+      tap_body: [
+        {
+          file: url + '/motions/' + type + '.v2.touch.mtn',
+          fade_in: 500,
+          fade_out: 200,
+        },
+      ],
+      thanking: [
+        {
+          file: url + '/motions/' + type + '.v2.thanking.mtn',
+          fade_in: 2000,
+          fade_out: 2000,
+        },
+      ],
+    },
+  };
+  var blob = new Blob([JSON.stringify(model)], {type : 'application/json'});
+  return URL.createObjectURL(blob);
+}
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    list22: [],
+    list33: []
+  },
+  methods: {
+    selectModel: function(it) {
+      init('assets/' + it.model);
+    },
+    randomModel: function(type) {
+      init(randomModel(type));
+    }
+  }
+});
+
+$.get('assets/haruna/models.json', function(data) {
+  var list = data.list.slice(0);
+  app.list22 = data.list;
+  app.list33 = list.map(function(it) {
+    return {
+      name: it.name.replace('22', '33'),
+      model: it.model.replace('22', '33'),
+    };
+  });
+});
+
+init('assets/haruna/22/model.default.json');
+</script>
+</body>
+</html>
